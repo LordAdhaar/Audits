@@ -1,4 +1,10 @@
+# Findings for Oku Finance Audit Contest 
+
+[https://audits.sherlock.xyz/contests/641](#)
+
 # High: Reentrancy in `fillOrder` Function
+
+https://github.com/sherlock-audit/2024-11-oku-judging/issues/222
 
 ## Summary
 The `fillOrder` function in `OracleLess.sol` is vulnerable to a reentrancy attack, which may result in the loss of user funds. An attacker can exploit the contract's token transfer mechanism due to the absence of proper reentrancy protections, risking significant financial losses for protocol users.
@@ -76,6 +82,8 @@ function fillOrder(uint96 pendingOrderIdx, uint96 orderId, address target, bytes
 
 
 # High: Predictable `orderId` Generation in `generateOrderId` Function
+
+https://github.com/sherlock-audit/2024-11-oku-judging/issues/61
 
 ## Summary
 The use of `block.timestamp` in the `generateOrderId` function makes order IDs predictable. Attackers can exploit this predictability to calculate upcoming `orderId` values and disrupt or front-run legitimate order placements, potentially undermining user trust in the protocol.
@@ -159,6 +167,8 @@ function generateOrderId(address sender) external returns (uint96) {
 
 
 # Medium: Incorrect Stale Price Check in `currentValue` Function
+
+https://github.com/sherlock-audit/2024-11-oku-judging/issues/224
 
 ## Summary
 An incorrect stale price check in `PythOracle.sol` causes improper price validation. The contract may reject valid prices and accept stale prices, resulting in potential financial losses for users.
